@@ -1,5 +1,6 @@
 require "sinatra"
 require "csv"
+require "dotenv/load"
 
 CSV_FILE = "#{ENV['PRJ_ROOT']}/latest.csv"
 
