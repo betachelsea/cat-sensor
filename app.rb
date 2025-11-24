@@ -6,23 +6,9 @@ require "./judge_cat.rb"
 CSV_FILE = "#{ENV['PRJ_ROOT']}/latest.csv"
 
 
-set :bind, "0.0.0.0"   # LANからも見せたいならこのまま。ngrok経由のみにするなら "127.0.0.1"
+set :bind, "127.0.0.1"
 set :port, 4567
-set :protection, except: :host_header  # ← 手っ取り早い解決
-
-=begin
-configure do
-  set :bind, "0.0.0.0"  # LANからアクセス可
-  set :host_authorization, {
-    permitted_hosts: [
-      ENV['PRJ_LOCAL_DOMAIN'],
-      "#{ENV['PRJ_LOCAL_DOMAIN']}:4567",
-      "#{ENV['NGROK_URI']}:4567",
-    ]
-  }
-end
-
-=end
+set :host_authorization, permitted_hosts: [".ngrok-free.dev"]
 
 get "/" do
   erb :index
